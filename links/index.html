@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Camilo</title>
+  <meta name="description" content="Todos os links do Camilo em um só lugar.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --text: #111111;
+      --surface: #4a4a4a;
+      --surface-text: #ffffff;
+      --focus: #e2262b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --text: #ffffff;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 500px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 48px max(20px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .avatar {
+      display: block;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .bio {
+      margin-top: 8px;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link {
+      position: relative;
+      display: block;
+      padding: 16px 56px;
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--surface-text);
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.15s;
+    }
+
+    .link svg {
+      position: absolute;
+      top: 50%;
+      left: 18px;
+      width: 22px;
+      height: 22px;
+      transform: translateY(-50%);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .link:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .link:active {
+      background: var(--focus);
+    }
+
+    @media (hover: hover) {
+      .link:hover {
+        background: var(--focus);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="profile">
+      <img class="avatar" src="foto.jpg" alt="Foto do Camilo" width="96" height="96">
+      <h1>Camilo</h1>
+      <p class="bio">Para sempre em busca de liberdade</p>
+    </header>
+
+    <!-- Para remover uma rede, apague o <li> inteiro. -->
+    <ul class="links">
+      <li>
+        <a class="link" href="https://www.youtube.com/@esse.camilo" rel="me">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+            <path d="m10 15 5-3-5-3z" />
+          </svg>
+          YouTube
+        </a>
+      </li>
+      <li>
+        <a class="link" href="https://www.instagram.com/esse.camilo" rel="me">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <path d="M17.5 6.5h.01" />
+          </svg>
+          Instagram
+        </a>
+      </li>
+      <li>
+        <a class="link" href="https://www.tiktok.com/@esse.camilo" rel="me">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5" />
+            <path d="M14 3c.4 2.8 2.3 4.6 5 5" />
+          </svg>
+          TikTok
+        </a>
+      </li>
+      <li>
+        <a class="link" href="https://facebook.com/esse.camilo" rel="me">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+          </svg>
+          Facebook
+        </a>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>
