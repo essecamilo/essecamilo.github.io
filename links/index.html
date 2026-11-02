@@ -110,7 +110,35 @@
       stroke-linejoin: round;
     }
 
-    .link:focus-visible {
+    .cookies {
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--surface-text);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .cookies-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .cookies button {
+      flex: 1;
+      min-height: 44px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text);
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .link:focus-visible,
+    .cookies button:focus-visible {
       outline: 2px solid var(--focus);
       outline-offset: 2px;
     }
@@ -179,6 +207,68 @@
         </a>
       </li>
     </ul>
+
+    <aside class="cookies" id="cookies" aria-label="Aviso de cookies" hidden>
+      <p>Esta página usa cookies para medir as visitas. Você permite?</p>
+      <div class="cookies-actions">
+        <button type="button" data-choice="granted">Permitir</button>
+        <button type="button" data-choice="denied">Não permitir</button>
+      </div>
+    </aside>
   </main>
+
+  <script>
+    (function () {
+      var GA_ID = 'G-9L82M9NVS3';
+      var STORAGE_KEY = 'cookies-choice';
+      var banner = document.getElementById('cookies');
+
+      function getChoice() {
+        try {
+          return localStorage.getItem(STORAGE_KEY);
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function saveChoice(choice) {
+        try {
+          localStorage.setItem(STORAGE_KEY, choice);
+        } catch (error) {}
+      }
+
+      // O Analytics só é carregado depois que a pessoa permite.
+      function loadAnalytics() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_ID);
+      }
+
+      var choice = getChoice();
+
+      if (choice === 'granted') {
+        loadAnalytics();
+      } else if (choice !== 'denied') {
+        banner.hidden = false;
+      }
+
+      banner.addEventListener('click', function (event) {
+        var selected = event.target.getAttribute('data-choice');
+        if (!selected) return;
+
+        saveChoice(selected);
+        banner.hidden = true;
+        if (selected === 'granted') loadAnalytics();
+      });
+    })();
+  </script>
 </body>
 </html>
